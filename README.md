@@ -35,6 +35,21 @@ All settings are environment variables (see `.env.example`).
 | `POWER_BASE_W`, `POWER_PER_WORKER_W` | `60`, `30` | Extra watts per active node, and per active worker |
 | `POWER_LIGHT_NODES`, `POWER_LIGHT_NODE_W` | empty, `55` | Comma-separated node names that draw a flat wattage |
 
+## Resource tiles and vendor badges (optional)
+
+Under the header there are tiles for the PC's graphics card, processor, an estimated total power draw, the server's CPU and disk wait, and the conversion pace. Each tile and each "now transcoding" card gets an NVIDIA, Intel or AMD badge. Node badges come from the node name in Tdarr (a name containing `rtx`/`nvidia`, `intel` or `amd` is enough), so naming your nodes e.g. `PC-RTX5080` and `NAS-Intel` makes it work.
+
+- The server tile reads `/proc`, so it only appears when the dashboard runs on Linux.
+- For the PC tiles, run `pc-stats-push.js` on the transcoding PC. It needs `nvidia-smi` and sends the numbers to the dashboard every few seconds:
+
+```sh
+DASHBOARD_URL=http://your-server:8080 node pc-stats-push.js
+```
+
+The dashboard must listen on an address the PC can reach (`HOST=0.0.0.0`). Only the GPU draw is measured. The CPU and rest-of-system watts are estimates you can tune with `PC_CPU_IDLE_W`, `PC_CPU_LOAD_W` and `PC_SYSTEM_W`.
+
+The "left" figure counts queued plus in-progress files, with a time estimate from the last hour's pace (it appears after about ten minutes of running).
+
 ## About the power estimate
 
 It is a rough estimate, not a measurement. The dashboard adds up the watts you configure for each active node, over time, and multiplies by `KWH_PRICE`. For a better number, measure your hardware with a power meter and set the watt values to match. The running total is stored in `energy.json` next to the server.
