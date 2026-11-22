@@ -126,10 +126,17 @@ async function data() {
   if (!FC || Date.now() - FC.t > 30000) FC = { t: Date.now(), v: await post('cruddb', { collection: 'FileJSONDB', mode: 'getAll' }) };
   const files = FC.v;
   const workers = [];
-  for (const n of Object.values(nodes)) for (const w of Object.values(n.workers || {}))
+  const active = new Set();                                   // files being processed right now (matched by folder/file name)
+  const tail = p => String(p).split('\\').join('/').split('/').slice(-2).join('/').toLowerCase();
+  for (const n of Object.values(nodes)) for (const w of Object.values(n.workers || {})) {
+    active.add(tail(w.file || ''));
     workers.push({ ...info(w.file || '', m), node: n.nodeName, pct: w.percentage || 0, fps: w.fps || 0, eta: w.ETA || '' });
+  }
   const list = Array.isArray(files) ? files : [];
-  const queue = list.filter(f => f.TranscodeDecisionMaker === 'Queued')
+  // Tdarr runs files with a higher "bumped" value first, then the rest; Tdarr keeps running files in the Queued state, so hide those
+  const bumped = f => (typeof f.bumped === 'number' ? f.bumped : 0);
+  const queue = list.filter(f => f.TranscodeDecisionMaker === 'Queued' && !active.has(tail(f._id)))
+    .sort((a, b) => bumped(b) - bumped(a) || String(a._id).localeCompare(String(b._id)))
     .map(f => ({ ...info(f._id, m), gb: (f.file_size || 0) / 1024 }));
   const done0 = list.filter(f => f.TranscodeDecisionMaker === 'Transcode success')
     .map(f => ({ ...info(f._id, m), gb: (f.file_size || 0) / 1024, t: f.lastTranscodeDate || 0 }))
