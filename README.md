@@ -1,4 +1,15 @@
+<p align="center"><img src="logo.svg" alt="tdarrflix logo" width="96"></p>
+
 # tdarr-dashboard
+
+<p align="center">
+  <img alt="Release" src="https://img.shields.io/github/v/release/oleh11/tdarr-dashboard?style=for-the-badge&label=RELEASE&labelColor=3a3f44&color=0e1114">
+  <img alt="License" src="https://img.shields.io/github/license/oleh11/tdarr-dashboard?style=for-the-badge&label=LICENSE&labelColor=3a3f44&color=ffffff">
+  <img alt="Node" src="https://img.shields.io/badge/NODE-18%2B-3c873a?style=for-the-badge&labelColor=3a3f44&logo=nodedotjs&logoColor=white">
+  <img alt="Tdarr" src="https://img.shields.io/badge/TDARR-3.x-1d9bf0?style=for-the-badge&labelColor=3a3f44">
+  <img alt="Dependencies" src="https://img.shields.io/badge/DEPENDENCIES-0-d98e04?style=for-the-badge&labelColor=3a3f44">
+  <img alt="Encoders" src="https://img.shields.io/badge/ENCODERS-NVENC%20%C2%B7%20QSV-2fb4a4?style=for-the-badge&labelColor=3a3f44">
+</p>
 
 A small Plex-style status page for [Tdarr](https://home.tdarr.io/). It shows what is transcoding right now, the queue, recent conversions with posters, space saved, and an optional estimate of the electricity used and the disk space you avoided buying.
 

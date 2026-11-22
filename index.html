@@ -1,5 +1,6 @@
 <!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Transcode Dashboard</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%23e5a00d%22%2F%3E%3Cpath%20d%3D%22M25%2019v26l18-13z%22%20fill%3D%22%231f2326%22%2F%3E%3Cpath%20d%3D%22M10%2025l6%207-6%207M54%2025l-6%207%206%207%22%20fill%3D%22none%22%20stroke%3D%22%231f2326%22%20stroke-width%3D%223.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E">
 <style>
 :root{--bg:#1f2326;--bg2:#282c30;--card:#2f3438;--tx:#eaecee;--mu:#9aa0a6;--gold:#e5a00d;--ok:#4ade80;--bd:#3a4045}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:14px "Open Sans",system-ui,sans-serif}
@@ -31,14 +32,23 @@ main{padding:18px 16px 60px}h2{font-size:19px;font-weight:600;margin:26px 0 12px
 .brand{display:inline-flex;align-items:center;gap:5px;font:800 11px/1 system-ui,sans-serif;letter-spacing:.04em;padding:4px 8px;border-radius:4px;color:#fff;white-space:nowrap;position:absolute;top:10px;right:10px}
 .brand.nv{background:#76b900;color:#111}.brand.in{background:#0068b5}.brand.am{background:#111;border:1px solid #ed1c24;box-shadow:inset 3px 0 0 #ed1c24}
 .brand svg{width:12px;height:12px}
+
+.logo{display:flex;align-items:center;gap:10px}.logo .lg{width:30px;height:30px;flex:none}
+.rel{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:34px 0 4px}
+.tg{display:inline-flex;font:600 11px/1 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;border-radius:3px;overflow:hidden}
+.tg i{font-style:normal;display:inline-flex;align-items:center;gap:7px;padding:9px 12px}
+.tg .l{background:#3a3f44;color:#d6d9dc}.tg .v{color:#fff}
+.tg .dk{background:#0e1114}.tg .wh{background:#fff;color:#1f2326}.tg .gn{background:#3c873a}
+.tg .bl{background:#1d9bf0}.tg .am{background:#d98e04;color:#111}.tg .tl{background:#2fb4a4;color:#06201c}
 </style></head><body>
-<header><div class="logo">tdarr<b>flix</b></div>
+<header><div class="logo"><svg class="lg" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="lgg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f5b82e"/><stop offset="1" stop-color="#d98e04"/></linearGradient></defs><rect width="64" height="64" rx="14" fill="url(#lgg)"/><path d="M25 19v26l18-13z" fill="#1f2326"/><path d="M10 25l6 7-6 7M54 25l-6 7 6 7" fill="none" stroke="#1f2326" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>tdarr<b>flix</b></span></div>
 <div class="stats"><span><b id="d">–</b>converted</span><span title="Files still to convert (queued plus in progress), with progress and an estimated time to finish at the last hour's pace"><b id="lf">–</b>left</span><span><b id="sv">–</b>saved</span><span><b id="f">–</b>failed</span><span title="Disk space freed, valued at the price per GB of a new drive (set with DRIVE_PRICE and DRIVE_TB)"><b id="dv">–</b>disk value saved</span><span title="Estimated extra electricity vs idle, at your electricity price (set with KWH_PRICE)"><b id="pw">–</b>est. power</span></div></header>
 <main>
 <div class="res" id="res"></div>
 <h2>Now transcoding</h2><div class="hero" id="now"></div>
 <h2>Up next</h2><div class="row" id="queue"></div>
 <h2>Recently converted</h2><div class="row" id="done"></div>
+<div class="rel"><span class="tg"><i class="l"><svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M1.5 1.5h5.6l7.4 7.4-5.6 5.6-7.4-7.4zm3 2.2a1.1 1.1 0 100 2.2 1.1 1.1 0 000-2.2z"/></svg>Release</i><i class="v dk">V1.1.0</i></span><span class="tg"><i class="l"><svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M3 1.5h6.5L13 5v9.5H3zm6 .9V5.5h3.1z"/></svg>License</i><i class="v wh">MIT</i></span><span class="tg"><i class="l"><svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M8 1l6.2 3.6v6.8L8 15 1.8 11.4V4.6z"/></svg>Node</i><i class="v gn">18+</i></span><span class="tg"><i class="l"><svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M4 2.5v11l9-5.5z"/></svg>Tdarr</i><i class="v bl">3.x</i></span><span class="tg"><i class="l"><svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M8 1l6 3v8l-6 3-6-3V4zm0 1.9L4.3 4.7 8 6.5l3.7-1.8z"/></svg>Dependencies</i><i class="v am">0</i></span><span class="tg"><i class="l"><svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor" aria-hidden="true"><path d="M5 5h6v6H5zM6.5 1.5h1v2h-1zm2 0h1v2h-1zM6.5 12.5h1v2h-1zm2 0h1v2h-1zM1.5 6.5h2v1h-2zm0 2h2v1h-2zM12.5 6.5h2v1h-2zm0 2h2v1h-2z"/></svg>Encoders</i><i class="v tl">NVENC · QSV</i></span></div>
 <div id="st"></div></main>
 <script>
 const $=i=>document.getElementById(i);
